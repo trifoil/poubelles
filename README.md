@@ -102,7 +102,7 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACC
 
 [Peer]
 # Client #1 details
-PublicKey = (client's public key goes here)
+PublicKey = $(cat /etc/wireguard/client.pub)
 
 # Traffic to route to this client
 AllowedIPs = 172.16.0.2/32
