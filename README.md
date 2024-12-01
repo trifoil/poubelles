@@ -11,7 +11,7 @@ shitpo
 
 ```
 su
-apt install wireguard
+apt install wireguard -y
 sudo sed -i 's/^#net\.ipv4\.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.d/99-sysctl.conf
 grep '^net.ipv4.ip_forward=1' /etc/sysctl.d/99-sysctl.conf
 systemctl reboot
@@ -22,16 +22,16 @@ su
 umask 077 
 privatekey=$(wg genkey)
 cat <<EOF > /etc/wireguard/server.key
-$privatekey
+    $privatekey
 EOF
 echo "The privatekey is $privatekey"
 pubkey=$(wg pubkey < /etc/wireguard/server.key)
 echo "The pubkey is $pubkey"
 cat <<EOF > /etc/wireguard/server.pub
-$pubkey
+    $pubkey
 EOF
 
-cat <<<EOF > /etc/wireguard/wg0.conf 
+cat <<EOF > /etc/wireguard/wg0.conf 
 [Interface]
 Address = 192.168.1.55/24
 ListenPort = 51820
