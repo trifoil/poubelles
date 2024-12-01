@@ -25,7 +25,7 @@ cat <<EOF > /etc/wireguard/server.key
     $privatekey
 EOF
 echo "The privatekey is $privatekey"
-pubkey=$(wg pubkey < /etc/wireguard/server.key)
+pubkey=$(wg pubkey /etc/wireguard/server.key)
 echo "The pubkey is $pubkey"
 cat <<EOF > /etc/wireguard/server.pub
     $pubkey
