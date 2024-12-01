@@ -21,15 +21,13 @@ systemctl reboot
 su
 umask 077 
 privatekey=$(wg genkey)
-cat <<EOF > /etc/wireguard/server.key
-    $privatekey
-EOF
+$privatekey > /etc/wireguard/server.key
 echo "The privatekey is $privatekey"
-pubkey=$(cat /etc/wireguard/server.key | wg pubkey)
+wg pubkey < /etc/wireguard/server.key > /etc/wireguard/server.pub
+cat /etc/wireguard/server.pub 
+pubkey=$(cat /etc/wireguard/server.pub)
 echo "The pubkey is $pubkey"
-cat <<EOF > /etc/wireguard/server.pub
-    $pubkey
-EOF
+
 
 cat <<EOF > /etc/wireguard/wg0.conf 
 [Interface]
